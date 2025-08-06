@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" sizes="50x50" href="lion.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <title>Slate</title>
+  </head>
+  <body>
+    <div class="wrapper" id="wrapper">
+      <div class="logostart"><img src="lion.png" width="50" height="50" /></div>
+      <div class="loadingslate">
+        <p>&nbsp&nbsp&nbsp&nbsp&nbspLoading Slate...</p>
+      </div>
+      <div class="loading-container">
+        <div class="loading-bar">
+          <div class="progress" id="progress"></div>
+        </div>
+        <div class="percentage" id="percentage">0%</div>
+      </div>
+    </div>
+
+    <div class="wrapper2" id="wrapper2" style="display: none">
+      <div class="container" id="container">
+        <div class="logodiv">
+          <div class="logo">
+            <img src="lion.png" width="45px" height="45px" />
+            <h1 class="typewriter">Slate.</h1>
+          </div>
+        </div>
+
+        <div class="take-a-note-div" id="take-a-note-div" tabindex="0">
+          <textarea
+            name="title-area"
+            id="title-area"
+            class="title-area"
+            placeholder="Title"
+          ></textarea>
+          <textarea
+            name="take-a-note"
+            id="take-a-note-textarea"
+            class="take-a-note-textarea"
+            placeholder="Take a note..."
+          ></textarea>
+          <div class="add-btn-div">
+            <button id="add-btn" class="add-btn">+</button>
+          </div>
+        </div>
+        <div class="note-deleted-msg" id="note-deleted-msg">
+          <p>Note deleted!</p>
+        </div>
+        <div class="pinned-notes" id="pinned-notes">
+          <h2 class="pinnedtext" id="pinnedtext">Pinned Notes</h2>
+          <div class="pinned-notes-wrapper" id="pinned-notes-wrapper"></div>
+        </div>
+        <div class="allnotetext"><h2>All Notes</h2></div>
+        <p class="no-note-text" id="no-note-text">
+          No notes yet. Create your first note above!
+        </p>
+        <div class="notewrapper" id="notewrapper"></div>
+        <div class="color-trigger"></div>
+      </div>
+      <div id="backdrop"></div>
+    </div>
+
+    <script>
+      const progressBar = document.getElementById("progress");
+      const percentageText = document.getElementById("percentage");
+      const wrapper = document.getElementById("wrapper");
+      const wrapper2 = document.getElementById("wrapper2");
+      const duration = 4000; // 4 seconds in milliseconds
+      const interval = 40; // update every 40ms for smooth animation
+      const steps = duration / interval;
+      let currentStep = 0;
+
+      const animate = () => {
+        if (currentStep <= steps) {
+          const progress = Math.min((currentStep / steps) * 100, 100);
+          progressBar.style.width = `${progress}%`;
+          percentageText.textContent = `${Math.round(progress)}%`;
+          currentStep++;
+          setTimeout(animate, interval);
+        } else {
+          // When loading completes
+          wrapper.style.display = "none";
+          wrapper2.style.display = "block";
+        }
+      };
+
+      // Start the animation
+      animate();
+    </script>
+    <script type="module" src="note-creation.js"></script>
+  </body>
+</html>

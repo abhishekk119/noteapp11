@@ -1,0 +1,783 @@
+body {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: whitesmoke;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.logodiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.typewriter {
+  font-family: monospace;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  animation: typing 2s steps(6) forwards;
+}
+
+/* Typing effect */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 6ch;
+  } /* 12 characters: Hello, world */
+}
+
+.take-a-note-div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 8px;
+  width: 500px;
+  outline: none;
+  padding-left: 10px;
+  padding-top: 18px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  margin-top: 18px;
+}
+
+.title-area {
+  border: solid 1px white;
+  border-radius: 6px;
+  background-color: white;
+  color: #1a1a1a;
+  padding-top: 15px;
+  padding-left: 15px;
+  width: 200px;
+  display: none;
+  outline: none;
+  resize: none;
+}
+
+.take-a-note-textarea {
+  width: 450px;
+  border: solid 1px white;
+  background-color: white;
+  color: #1a1a1a;
+  border-radius: 6px;
+  padding-top: 15px;
+  padding-left: 15px;
+  outline: none;
+  resize: none;
+}
+
+.take-a-note-div:focus-within {
+  height: 150px;
+}
+
+.take-a-note-div:focus-within .title-area {
+  display: block;
+}
+
+.take-a-note-div:focus-within .add-btn {
+  display: block;
+}
+
+.add-btn-div {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  padding: 8px;
+}
+
+.add-btn {
+  width: 45px;
+  height: 45px;
+  display: none;
+  border: 1px solid white;
+  border-radius: 50%;
+  background-color: white;
+  color: black;
+  font-size: 30px;
+  cursor: pointer;
+  margin-right: 12px;
+}
+
+.add-btn:hover {
+  background-color: rgb(149, 149, 149);
+  border: 1px solid rgb(149, 149, 149);
+  color: white;
+}
+
+.notewrapper {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  padding: 15px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.note {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+  padding: 15px;
+  width: 390px;
+  min-height: 180px;
+  max-height: 350px;
+  border: 2px solid white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  /*animation: rubberBand; /* referring directly to the animation's @keyframe declaration */
+  /*animation-duration: 2s; /* don't forget to set a duration! */
+  z-index: 1;
+  overflow: hidden;
+}
+
+.note {
+  -webkit-tap-highlight-color: transparent; /* For iOS/Safari */
+  tap-highlight-color: transparent; /* Standard property */
+}
+
+.note-content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-grow: 1;
+  padding: 5px 0;
+  position: relative;
+}
+
+.note-content p {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+.note h3 {
+  margin: 0 0 10px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+}
+
+.note-placeholder {
+  width: 250px;
+  height: 150px;
+  margin: 15px;
+  pointer-events: none;
+}
+
+.note p {
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+#backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  display: none;
+}
+
+.noteoptions {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  gap: 2px;
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+.pin-button:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+.color-selector {
+  display: none;
+  width: 250px;
+  padding: 10px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  z-index: 10000;
+}
+
+.color {
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.color:hover {
+  transform: scale(1.1);
+}
+
+.color-trigger {
+  position: relative;
+  display: inline-block;
+}
+
+.note.expanded {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 350px;
+  z-index: 9999;
+  overflow: auto;
+}
+
+.note.expanded .note-content {
+  height: calc(100% - 60px);
+  overflow-y: auto;
+}
+
+.note.expanded h3,
+.note.expanded p {
+  white-space: normal;
+  overflow: visible;
+}
+
+.note.expanded [contenteditable="true"] {
+  outline: none !important;
+}
+
+.note [contenteditable="true"] {
+  outline: none !important;
+}
+
+.colorselectorbutton {
+  background: transparent;
+  border: none;
+}
+
+.allnotetext {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.allnotetext h2 {
+  color: rgb(65, 65, 65);
+  font-size: 35px;
+}
+
+.pinnedtext {
+  color: rgb(65, 65, 65);
+  font-size: 35px;
+}
+
+.pinned-notes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  height: auto;
+}
+
+.pinned-notes-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.colorSelectDiv {
+  height: auto;
+  width: 320px;
+  background-color: transparent;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  display: flex;
+  cursor: pointer;
+}
+
+.colorSelectDiv.show {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.animate:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+/* Font Awesome icon styles */
+.noteoptions i {
+  color: black;
+  transition: all 0.2s ease;
+  padding: 5px;
+}
+
+.noteoptions button:hover i {
+  color: #333;
+  transform: scale(1.1);
+}
+
+@keyframes noteOpen {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes noteClose {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+}
+
+.note.expanded {
+  animation: noteOpen 0.3s ease-out forwards;
+}
+
+.note.closing {
+  animation: noteClose 0.2s ease-in forwards;
+}
+
+/* Add this to your style.css */
+.pinning-animation {
+  animation: pinningEffect 0.4s ease-out forwards;
+  transform-origin: top center;
+}
+
+@keyframes pinningEffect {
+  0% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.95) translateY(-10px);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.backgroundChangerDiv {
+  position: absolute;
+  /*top: 70px; /* adjust as needed to position below icons */
+  right: 10px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 145px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  animation: bounceIn; /* referring directly to the animation's @keyframe declaration */
+  animation-duration: 0.5s; /* don't forget to set a duration! */
+  gap: 5px;
+  width: fit-content;
+  border: 2px solid white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.08); /* subtle inner border */
+  background-color: white;
+  z-index: 1000; /* make sure it's above the note */
+}
+
+.backgroundChangerDiv::after {
+  content: "";
+  position: absolute;
+  bottom: -10px; /* Push it below div2 */
+  right: 40px;
+  transform: translateX(-50%);
+  border-width: 10px 10px 0 10px;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
+}
+
+/*@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.backgroundChangerDiv.animate-in {
+  animation: fadeInScale 0.25s ease-out;
+}*/
+
+.imageSelectorDiv {
+  height: auto;
+  width: 320px;
+  background-color: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.colortextdiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 320px;
+}
+
+.colorText {
+  color: rgb(179, 179, 179);
+  font-weight: bold;
+}
+
+/* Add this to your style.css */
+body.backdrop-visible {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+.note-checkbox {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  color: #1a1a1a;
+  border-radius: 4px;
+  margin-right: 10px;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.checked-item {
+  text-decoration: line-through;
+}
+
+.note-deleted-msg {
+  margin-top: 6px;
+  height: 50px;
+  width: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #1a1a1a;
+  background-color: white;
+  border: 1px solid rgb(233, 232, 232);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+
+.wrapper {
+  position: fixed;
+  font-family: "Inter", sans-serif;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  width: 100vw;
+  gap: 10px;
+  margin: 0 auto;
+}
+
+.logostart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 2s infinite;
+}
+
+.loadingslate p {
+  animation: pulse 2s infinite;
+  animation-delay: 0.2s;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  color: #333;
+  text-align: center;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.loading-container {
+  width: 300px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+.loading-bar {
+  width: 100%;
+  height: 20px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress {
+  height: 100%;
+  width: 0%;
+  background-color: black;
+  transition: width 0.1s linear;
+}
+
+.percentage {
+  text-align: center;
+  font-size: 16px;
+}
+
+.gradient {
+  height: 35px;
+  width: 35px;
+  border: 2px solid white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.background-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+.topdiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.closebutton {
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  display: none; /* Hidden by default */
+  font-size: 18px;
+  padding: 5px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 10;
+}
+
+.note.expanded .closebutton {
+  display: block; /* Show when note is expanded */
+}
+
+/* Media Queries for Mobile Responsiveness */
+@media only screen and (max-width: 768px) {
+  .logodiv {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    width: 100%;
+    height: auto;
+    margin: 0;
+  }
+
+  .container {
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+
+  .take-a-note-div {
+    width: 90%;
+    max-width: 90%;
+    margin-top: 10px;
+  }
+
+  .take-a-note-textarea {
+    width: 90%;
+    padding: 10px;
+  }
+
+  .title-area {
+    width: 90%;
+    padding: 10px;
+  }
+
+  /* Adjust note display for smaller screens */
+  .notewrapper {
+    padding: 5px;
+    gap: 10px;
+  }
+
+  .note {
+    width: 320px;
+    max-width: 100%;
+    margin: 5px 0;
+    height: auto;
+    min-height: 150px;
+    max-height: 350px;
+  }
+
+  /* Adjust expanded note view */
+  .note.expanded {
+    width: 90%;
+    height: 100%;
+    max-height: 80vh;
+  }
+
+  /* Adjust pinned notes section */
+  .pinned-notes-wrapper {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  /* Color selection popup */
+  .colorSelectDiv {
+    width: 310px;
+    flex-wrap: wrap;
+    height: auto;
+    padding: 5px;
+  }
+
+  /* Typography adjustments */
+  .allnotetext h2,
+  .pinnedtext {
+    font-size: 24px;
+  }
+
+  /* Button adjustments */
+  .add-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 24px;
+  }
+
+  /* Note options icons */
+  .noteoptions i {
+    font-size: 18px;
+    padding: 3px;
+  }
+
+  .note.expanded .backgroundChangerDiv {
+    margin-bottom: 144px;
+  }
+
+  /* Hide backdrop when keyboard is open */
+  @media (max-height: 500px) {
+    #backdrop {
+      display: none !important;
+    }
+
+    .note.expanded {
+      top: 20px;
+      transform: translateX(-50%);
+    }
+  }
+}
+
+/* Additional optimization for very small screens */
+@media only screen and (max-width: 480px) {
+  .take-a-note-div:focus-within {
+    height: 180px;
+  }
+
+  .note {
+    padding: 10px;
+  }
+
+  .note h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  .note p {
+    font-size: 14px;
+  }
+
+  .note small {
+    font-size: 12px;
+  }
+
+  .noteoptions {
+    gap: 5px;
+  }
+}
+
+.no-note-text {
+  color: grey;
+}
+
+/* Landscape orientation adjustments */
+@media only screen and (max-width: 768px) and (orientation: landscape) {
+  .note.expanded {
+    height: 70vh;
+  }
+
+  .take-a-note-div:focus-within {
+    height: 120px;
+  }
+}
